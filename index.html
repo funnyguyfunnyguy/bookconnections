@@ -396,10 +396,10 @@ const PUZZLES = [
   },
   { // 13
     categories: [
-      { name: "Green-Eyed Characters",      emoji: "👁️",  color: "var(--cat-yellow)", words: ["HARRY","PERCY","LILY","VIOLET"] },
-      { name: "Dragon Riders",              emoji: "🐲",  color: "var(--cat-green)",  words: ["VIOLET","XADEN","CHARLIE","HAGRID"] },
-      { name: "Invisible at Will",          emoji: "👻",  color: "var(--cat-blue)",   words: ["HARRY","ANNABETH","PERCY","NICO"] },
-      { name: "Expelled or Nearly So",      emoji: "📜",  color: "var(--cat-purple)", words: ["HAGRID","HARRY","RIDOC","HERMIONE"] },
+      { name: "Magical Transport",               emoji: "🚀",  color: "var(--cat-yellow)", words: ["PORTKEY","FLOO","BROOM","THESTRAL"] },
+      { name: "Mythological Locations",            emoji: "🏛️",  color: "var(--cat-green)",  words: ["OLYMPUS","OGYGIA","TARTARUS","ELYSIUM"] },
+      { name: "Fourth Wing Rider Friends",         emoji: "🐲",  color: "var(--cat-blue)",   words: ["RIDOC","SAWYER","RHIANNON","IMOGEN"] },
+      { name: "Burdened by Their Parent's Rank",   emoji: "👑",  color: "var(--cat-purple)", words: ["DRACO","XADEN","DAIN","THALIA"] },
     ]
   },
   { // 14
@@ -411,6 +411,25 @@ const PUZZLES = [
     ]
   },
 ];
+
+// ═══════════════════════════════════════════════
+//  PUZZLE VALIDATION — catch duplicates at load
+// ═══════════════════════════════════════════════
+(function validatePuzzles() {
+  for (let i = PUZZLES.length - 1; i >= 0; i--) {
+    const allWords = PUZZLES[i].categories.flatMap(c => c.words);
+    const seen = new Set();
+    let hasDup = false;
+    allWords.forEach(w => {
+      if (seen.has(w)) { console.error(`Puzzle ${i+1} duplicate: "${w}"`); hasDup = true; }
+      seen.add(w);
+    });
+    if (hasDup || allWords.length !== 16) {
+      console.warn(`Removing broken puzzle ${i+1}`);
+      PUZZLES.splice(i, 1);
+    }
+  }
+})();
 
 // ═══════════════════════════════════════════════
 //  DATE-BASED PUZZLE SELECTION
