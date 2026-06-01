@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Realm Connections — Daily Puzzle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0a0a14;
+    --bg-mid: #111122;
+    --bg-card: rgba(255,255,255,0.05);
+    --gold: #F9DF6D;
+    --gold-dim: #c4a83a;
+    --gold-glow: rgba(249,223,109,0.25);
+    --text: #d4d4e0;
+    --text-dim: #6a6a80;
+    --text-faint: #3e3e55;
+    --cat-yellow: #F9DF6D;
+    --cat-green: #A0C35A;
+    --cat-blue: #7EB8DA;
+    --cat-purple: #BA81C5;
+    --radius: 10px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    height: 100%;
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family: 'Crimson Text', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(90,60,140,0.12), transparent),
+      radial-gradient(ellipse 60% 50% at 20% 100%, rgba(40,60,120,0.08), transparent),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(120,50,80,0.06), transparent),
+      var(--bg-deep);
+  }
+
+  /* ── Particles ── */
+  #particles {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+    opacity: 0;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+    8%   { opacity: 0.8; }
+    85%  { opacity: 0.4; }
+    100% { transform: translateY(-105vh) translateX(var(--dx)) scale(0.3); opacity: 0; }
+  }
+
+  /* ── Layout ── */
+  #app {
+    position: relative; z-index: 1;
+    width: 100%; max-width: 520px;
+    padding: 28px 16px 40px;
+    display: flex; flex-direction: column; align-items: center; gap: 18px;
+    animation: fadeIn 0.7s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── Header ── */
+  .header { text-align: center; margin-bottom: 2px; }
+  .header h1 {
+    font-family: 'Cinzel', Georgia, serif;
+    font-weight: 900; font-size: 30px;
+    letter-spacing: 5px; text-transform: uppercase;
+    background: linear-gradient(135deg, #F9DF6D 0%, #e8a849 30%, #F9DF6D 60%, #d4a03c 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    animation: shimmer 5s linear infinite;
+    line-height: 1.2;
+  }
+  @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+
+  .subtitle {
+    color: var(--text-dim); font-size: 12px; letter-spacing: 3px;
+    text-transform: uppercase; margin-top: 6px;
+  }
+  .instructions {
+    color: var(--text-faint); font-size: 14px; font-style: italic; margin-top: 10px;
+  }
+  .puzzle-number {
+    display: inline-block; margin-top: 8px; padding: 3px 14px;
+    border: 1px solid rgba(249,223,109,0.15); border-radius: 100px;
+    font-family: 'Cinzel', Georgia, serif; font-size: 11px;
+    color: var(--gold-dim); letter-spacing: 2px;
+  }
+
+  /* ── Solved categories ── */
+  #solved { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+  .solved-cat {
+    border-radius: var(--radius); padding: 16px 20px; text-align: center;
+    animation: revealCat 0.45s ease both;
+    position: relative; overflow: hidden;
+  }
+  @keyframes revealCat { 0% { transform: scaleY(0.3); opacity: 0; } 100% { transform: scaleY(1); opacity: 1; } }
+  .solved-cat .cat-name {
+    font-family: 'Cinzel', Georgia, serif; font-weight: 700;
+    font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
+    color: #1a1a1a; margin-bottom: 3px;
+  }
+  .solved-cat .cat-words {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 13px; color: #1a1a1a; opacity: 0.7; letter-spacing: 1px;
+  }
+
+  /* ── Grid ── */
+  #grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 7px;
+  }
+
+  .tile {
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--text);
+    font-family: 'Cinzel', Georgia, serif;
+    font-weight: 700; font-size: 13px;
+    letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    user-select: none;
+    text-align: center;
+    padding: 4px;
+    line-height: 1.15;
+  }
+  .tile:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); }
+  .tile.selected {
+    background: linear-gradient(135deg, var(--gold), #e6c84a);
+    color: #1a1a1a;
+    border-color: transparent;
+    transform: scale(1.04);
+    box-shadow: 0 4px 18px var(--gold-glow), inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+  .tile.shake { animation: shake 0.4s ease; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    50% { transform: translateX(6px); }
+    75% { transform: translateX(-3px); }
+  }
+  .tile.small-text { font-size: 10px; }
+
+  /* ── Mistakes ── */
+  .mistakes { display: flex; gap: 8px; align-items: center; justify-content: center; }
+  .mistakes span { font-size: 13px; color: var(--text-dim); letter-spacing: 1px; }
+  .dot {
+    width: 13px; height: 13px; border-radius: 50%;
+    transition: all 0.35s ease;
+  }
+  .dot.active { background: var(--gold); box-shadow: 0 0 8px var(--gold-glow); }
+  .dot.spent  { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
+
+  /* ── Buttons ── */
+  .btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    padding: 10px 24px; border-radius: 100px;
+    font-family: 'Cinzel', Georgia, serif; font-size: 12px;
+    font-weight: 600; letter-spacing: 1.8px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s; border: none; outline: none;
+  }
+  .btn:hover:not(:disabled) { filter: brightness(1.12); }
+  .btn-ghost {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    color: var(--text-dim);
+  }
+  .btn-ghost:disabled { color: var(--text-faint); cursor: default; }
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold), #e6c84a);
+    color: #1a1a1a;
+    box-shadow: 0 4px 16px var(--gold-glow);
+  }
+  .btn-gold:disabled {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-faint);
+    box-shadow: none; cursor: default;
+  }
+  .btn-gold.pulse { animation: pulse 2s infinite; }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(249,223,109,0.35); }
+    50%     { box-shadow: 0 0 0 8px rgba(249,223,109,0); }
+  }
+
+  /* ── Toast ── */
+  #toast {
+    position: fixed; top: 28px; left: 50%; transform: translateX(-50%);
+    background: rgba(16,16,30,0.96); color: var(--gold);
+    padding: 10px 28px; border-radius: 100px;
+    font-family: 'Cinzel', Georgia, serif; font-size: 13px;
+    font-weight: 600; letter-spacing: 1.5px;
+    border: 1px solid rgba(249,223,109,0.15);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    z-index: 200; pointer-events: none;
+    opacity: 0; transition: opacity 0.25s ease;
+    white-space: nowrap;
+  }
+  #toast.show { opacity: 1; }
+
+  /* ── End state ── */
+  .end-msg {
+    text-align: center; padding: 8px 0;
+  }
+  .end-msg p {
+    font-family: 'Cinzel', Georgia, serif; font-size: 18px;
+    font-weight: 700; letter-spacing: 2px;
+  }
+
+  /* ── Countdown ── */
+  .countdown {
+    text-align: center; margin-top: 4px;
+    color: var(--text-dim); font-size: 13px; letter-spacing: 1px;
+  }
+  .countdown .time {
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 22px; color: var(--gold-dim); letter-spacing: 3px;
+    display: block; margin-top: 4px;
+  }
+
+  /* ── Series legend ── */
+  .legend {
+    display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin-top: 6px;
+  }
+  .legend span { font-size: 11px; color: var(--text-faint); letter-spacing: 1.5px; }
+  .legend .dot-pj { color: #4EC9B0; }
+  .legend .dot-hp { color: #D4A03C; }
+  .legend .dot-fw { color: #BA81C5; }
+
+  /* ── Responsive ── */
+  @media (max-width: 400px) {
+    .tile { font-size: 10px; letter-spacing: 0.5px; }
+    .tile.small-text { font-size: 9px; }
+    .header h1 { font-size: 24px; letter-spacing: 3px; }
+    .btn { padding: 9px 18px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+<div id="toast"></div>
+
+<div id="app">
+  <div class="header">
+    <h1>Connections</h1>
+    <div class="subtitle">Percy Jackson · Harry Potter · Fourth Wing</div>
+    <div class="instructions">Find four groups of four that share a connection</div>
+    <div class="puzzle-number" id="puzzleNum"></div>
+  </div>
+
+  <div id="solved"></div>
+  <div id="grid"></div>
+
+  <div class="mistakes" id="mistakesRow"></div>
+
+  <div class="btn-row" id="controls">
+    <button class="btn btn-ghost" id="btnShuffle" onclick="shuffleGrid()">Shuffle</button>
+    <button class="btn btn-ghost" id="btnDeselect" onclick="deselectAll()" disabled>Deselect</button>
+    <button class="btn btn-gold" id="btnSubmit" onclick="submitGuess()" disabled>Submit</button>
+  </div>
+
+  <div id="endState" style="display:none"></div>
+
+  <div class="countdown" id="countdown">
+    <span>Next puzzle in</span>
+    <span class="time" id="timer"></span>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot-pj">●</span> Percy Jackson</span>
+    <span><span class="dot-hp">●</span> Harry Potter</span>
+    <span><span class="dot-fw">●</span> Fourth Wing</span>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+//  PUZZLE DATABASE
+// ═══════════════════════════════════════════════
+const PUZZLES = [
+  { // 1
+    categories: [
+      { name: "Training Grounds",    emoji: "⚔️",  color: "var(--cat-yellow)", words: ["HOGWARTS","BASGIATH","HALF-BLOOD","BEAUXBATONS"] },
+      { name: "Named Dragons",       emoji: "🐉",  color: "var(--cat-green)",  words: ["TAIRN","ANDARNA","NORBERT","PELEUS"] },
+      { name: "The Love Interest",   emoji: "💘",  color: "var(--cat-blue)",   words: ["ANNABETH","GINNY","XADEN","CHO"] },
+      { name: "Secretly a Traitor",  emoji: "🗡️",  color: "var(--cat-purple)", words: ["LUKE","DAIN","QUIRRELL","SILENA"] },
+    ]
+  },
+  { // 2
+    categories: [
+      { name: "Protective Mothers",      emoji: "🛡️",  color: "var(--cat-yellow)", words: ["SALLY","LILY","LILITH","MOLLY"] },
+      { name: "Subject of a Prophecy",    emoji: "🔮",  color: "var(--cat-green)",  words: ["HARRY","PERCY","VIOLET","NEVILLE"] },
+      { name: "Winged Companions",        emoji: "🪽",  color: "var(--cat-blue)",   words: ["BUCKBEAK","BLACKJACK","FAWKES","SGAEYL"] },
+      { name: "Surname = Common Word",    emoji: "📖",  color: "var(--cat-purple)", words: ["POTTER","GRANGER","CHASE","RIDDLE"] },
+    ]
+  },
+  { // 3
+    categories: [
+      { name: "Hogwarts Houses",         emoji: "🏰",  color: "var(--cat-yellow)", words: ["GRYFFINDOR","SLYTHERIN","HUFFLEPUFF","RAVENCLAW"] },
+      { name: "Olympian Gods",           emoji: "⚡",  color: "var(--cat-green)",  words: ["POSEIDON","ATHENA","ARES","HERMES"] },
+      { name: "Violet's Squad",          emoji: "🐲",  color: "var(--cat-blue)",   words: ["RIDOC","RHIANNON","SAWYER","IMOGEN"] },
+      { name: "Kept a Dangerous Secret", emoji: "🤫",  color: "var(--cat-purple)", words: ["DUMBLEDORE","CHIRON","SNAPE","LILITH"] },
+    ]
+  },
+  { // 4
+    categories: [
+      { name: "Mythical Beasts",          emoji: "🦅",  color: "var(--cat-yellow)", words: ["HIPPOGRIFF","MINOTAUR","GRYPHON","BASILISK"] },
+      { name: "The Weasley Family",       emoji: "🧡",  color: "var(--cat-green)",  words: ["RON","GINNY","FRED","ARTHUR"] },
+      { name: "Children of the Big Three", emoji: "🔱", color: "var(--cat-blue)",   words: ["PERCY","THALIA","NICO","HAZEL"] },
+      { name: "Not What They Seem",       emoji: "🎭",  color: "var(--cat-purple)", words: ["MOODY","FRANK","TYSON","TONKS"] },
+    ]
+  },
+  { // 5
+    categories: [
+      { name: "Died Protecting Others",    emoji: "💀",  color: "var(--cat-yellow)", words: ["DOBBY","BECKENDORF","LIAM","HEDWIG"] },
+      { name: "Supreme Villain",           emoji: "👑",  color: "var(--cat-green)",  words: ["VOLDEMORT","KRONOS","VARRISH","UMBRIDGE"] },
+      { name: "The Loyal Best Friend",     emoji: "🤝",  color: "var(--cat-blue)",   words: ["GROVER","RON","RIDOC","HERMIONE"] },
+      { name: "Shadow & Darkness",         emoji: "🌑",  color: "var(--cat-purple)", words: ["NICO","XADEN","SNAPE","HADES"] },
+    ]
+  },
+  { // 6
+    categories: [
+      { name: "Led a Quest",              emoji: "🗺️",  color: "var(--cat-yellow)", words: ["PERCY","ANNABETH","CLARISSE","GROVER"] },
+      { name: "Order of the Phoenix",     emoji: "🔥",  color: "var(--cat-green)",  words: ["SIRIUS","LUPIN","TONKS","MOODY"] },
+      { name: "Marked Ones",              emoji: "⛓️",  color: "var(--cat-blue)",   words: ["XADEN","BODHI","GARRICK","LIAM"] },
+      { name: "Secret Animagus",          emoji: "🐾",  color: "var(--cat-purple)", words: ["MCGONAGALL","PETTIGREW","JAMES","RITA"] },
+    ]
+  },
+  { // 7
+    categories: [
+      { name: "Name Is Also a Flower",    emoji: "🌸",  color: "var(--cat-yellow)", words: ["VIOLET","HAZEL","LAVENDER","LILY"] },
+      { name: "Named After a Star",       emoji: "✨",  color: "var(--cat-green)",  words: ["SIRIUS","LUNA","DRACO","ANDROMEDA"] },
+      { name: "The Comic Relief",         emoji: "😂",  color: "var(--cat-blue)",   words: ["RON","GROVER","RIDOC","FRED"] },
+      { name: "Redeemed by Sacrifice",    emoji: "⚰️",  color: "var(--cat-purple)", words: ["SNAPE","SILENA","LUKE","ETHAN"] },
+    ]
+  },
+  { // 8
+    categories: [
+      { name: "Horcruxes",                emoji: "💍",  color: "var(--cat-yellow)", words: ["DIARY","RING","LOCKET","DIADEM"] },
+      { name: "Greek Monsters",           emoji: "🐍",  color: "var(--cat-green)",  words: ["MEDUSA","MINOTAUR","HYDRA","ECHIDNA"] },
+      { name: "Battle of Hogwarts Hero",  emoji: "⚔️",  color: "var(--cat-blue)",   words: ["NEVILLE","LUNA","MCGONAGALL","MOLLY"] },
+      { name: "Fourth Wing Inner Circle", emoji: "🐲",  color: "var(--cat-purple)", words: ["XADEN","LIAM","RHIANNON","BODHI"] },
+    ]
+  },
+  { // 9
+    categories: [
+      { name: "Marauder Nicknames",        emoji: "🐺",  color: "var(--cat-yellow)", words: ["MOONY","PADFOOT","PRONGS","WORMTAIL"] },
+      { name: "Camp Half-Blood Gods",      emoji: "⚡",  color: "var(--cat-green)",  words: ["DIONYSUS","APOLLO","DEMETER","APHRODITE"] },
+      { name: "Fourth Wing Dragons",       emoji: "🐉",  color: "var(--cat-blue)",   words: ["TAIRN","SGAEYL","ANDARNA","DEIGH"] },
+      { name: "Fierce Heroines",           emoji: "⚔️",  color: "var(--cat-purple)", words: ["HERMIONE","ANNABETH","VIOLET","THALIA"] },
+    ]
+  },
+  { // 10
+    categories: [
+      { name: "Triwizard Champions",       emoji: "🏆",  color: "var(--cat-yellow)", words: ["HARRY","CEDRIC","FLEUR","KRUM"] },
+      { name: "Daughters of War",          emoji: "🗡️",  color: "var(--cat-green)",  words: ["CLARISSE","VIOLET","ANNABETH","THALIA"] },
+      { name: "Prisons & Labyrinths",      emoji: "🔒",  color: "var(--cat-blue)",   words: ["AZKABAN","TARTARUS","LABYRINTH","CHAMBER"] },
+      { name: "Led With Dark Secrets",     emoji: "🌑",  color: "var(--cat-purple)", words: ["DUMBLEDORE","XADEN","CHIRON","SNAPE"] },
+    ]
+  },
+  { // 11
+    categories: [
+      { name: "Half-Blood Characters",     emoji: "🩸",  color: "var(--cat-yellow)", words: ["PERCY","HARRY","HAGRID","FRANK"] },
+      { name: "Said Goodbye Too Soon",     emoji: "💔",  color: "var(--cat-green)",  words: ["FRED","BIANCA","LIAM","SIRIUS"] },
+      { name: "Magical Healers",           emoji: "💊",  color: "var(--cat-blue)",   words: ["APOLLO","POMFREY","WILL","NOLON"] },
+      { name: "Controls an Element",       emoji: "🌊",  color: "var(--cat-purple)", words: ["POSEIDON","VIOLET","THALIA","NICO"] },
+    ]
+  },
+  { // 12
+    categories: [
+      { name: "Magical Artifacts",          emoji: "✨",  color: "var(--cat-yellow)", words: ["HORCRUX","FLEECE","CODEX","HALLOWS"] },
+      { name: "Teachers You Fear",          emoji: "😨",  color: "var(--cat-green)",  words: ["SNAPE","ARES","VARRISH","UMBRIDGE"] },
+      { name: "Has a Famous Scar",          emoji: "⚡",  color: "var(--cat-blue)",   words: ["HARRY","LUKE","XADEN","PERCY"] },
+      { name: "Immortal Beings",            emoji: "♾️",  color: "var(--cat-purple)", words: ["KRONOS","CHIRON","CALYPSO","FLAMEL"] },
+    ]
+  },
+  { // 13
+    categories: [
+      { name: "Green-Eyed Characters",      emoji: "👁️",  color: "var(--cat-yellow)", words: ["HARRY","PERCY","LILY","VIOLET"] },
+      { name: "Dragon Riders",              emoji: "🐲",  color: "var(--cat-green)",  words: ["VIOLET","XADEN","CHARLIE","HAGRID"] },
+      { name: "Invisible at Will",          emoji: "👻",  color: "var(--cat-blue)",   words: ["HARRY","ANNABETH","PERCY","NICO"] },
+      { name: "Expelled or Nearly So",      emoji: "📜",  color: "var(--cat-purple)", words: ["HAGRID","HARRY","RIDOC","HERMIONE"] },
+    ]
+  },
+  { // 14
+    categories: [
+      { name: "Enchanted Weapons",          emoji: "⚔️",  color: "var(--cat-yellow)", words: ["RIPTIDE","BACKBITER","ELDER","STYGIAN"] },
+      { name: "Quidditch Positions",        emoji: "🧹",  color: "var(--cat-green)",  words: ["SEEKER","KEEPER","CHASER","BEATER"] },
+      { name: "Olympian Cabin Heads",       emoji: "🏛️",  color: "var(--cat-blue)",   words: ["PERCY","ANNABETH","CLARISSE","KATIE"] },
+      { name: "Wing Leaders & Commanders",  emoji: "🦅",  color: "var(--cat-purple)", words: ["XADEN","GARRICK","BODHI","DAIN"] },
+    ]
+  },
+];
+
+// ═══════════════════════════════════════════════
+//  DATE-BASED PUZZLE SELECTION
+// ═══════════════════════════════════════════════
+function getDayIndex() {
+  const now = new Date();
+  const epoch = new Date(2025, 0, 1);
+  const diff = Math.floor((now - epoch) / 86400000);
+  return diff % PUZZLES.length;
+}
+
+function getPuzzleNumber() {
+  const now = new Date();
+  const epoch = new Date(2025, 0, 1);
+  return Math.floor((now - epoch) / 86400000) + 1;
+}
+
+// ═══════════════════════════════════════════════
+//  GAME STATE
+// ═══════════════════════════════════════════════
+let todayPuzzle = PUZZLES[getDayIndex()];
+let grid = [];
+let selected = [];
+let solved = [];
+let mistakes = 0;
+const maxMistakes = 4;
+let gameOver = false;
+let gameWon = false;
+let toastTimer = null;
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+function init() {
+  todayPuzzle = PUZZLES[getDayIndex()];
+  grid = shuffle(todayPuzzle.categories.flatMap(c => c.words));
+  selected = [];
+  solved = [];
+  mistakes = 0;
+  gameOver = false;
+  gameWon = false;
+
+  document.getElementById('puzzleNum').textContent = '# ' + getPuzzleNumber();
+  renderMistakes();
+  renderGrid();
+  renderSolved();
+  updateButtons();
+  document.getElementById('endState').style.display = 'none';
+  document.getElementById('controls').style.display = 'flex';
+  document.getElementById('mistakesRow').style.display = 'flex';
+  startCountdown();
+}
+
+// ═══════════════════════════════════════════════
+//  SHUFFLE
+// ═══════════════════════════════════════════════
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function shuffleGrid() {
+  grid = shuffle(grid);
+  renderGrid();
+}
+
+// ═══════════════════════════════════════════════
+//  RENDERING
+// ═══════════════════════════════════════════════
+function renderGrid() {
+  const el = document.getElementById('grid');
+  el.innerHTML = '';
+  grid.forEach(word => {
+    const tile = document.createElement('div');
+    tile.className = 'tile' + (selected.includes(word) ? ' selected' : '');
+    if (word.length > 9) tile.classList.add('small-text');
+    tile.textContent = word;
+    tile.onclick = () => toggleWord(word);
+    el.appendChild(tile);
+  });
+}
+
+function renderSolved() {
+  const el = document.getElementById('solved');
+  el.innerHTML = '';
+  solved.forEach((cat, i) => {
+    const div = document.createElement('div');
+    div.className = 'solved-cat';
+    div.style.background = cat.color;
+    div.style.animationDelay = (i * 0.04) + 's';
+    div.innerHTML = `
+      <div class="cat-name">${cat.emoji} ${cat.name}</div>
+      <div class="cat-words">${cat.words.join(', ')}</div>
+    `;
+    el.appendChild(div);
+  });
+}
+
+function renderMistakes() {
+  const el = document.getElementById('mistakesRow');
+  let html = '<span>Mistakes remaining</span><div style="display:flex;gap:6px">';
+  for (let i = 0; i < maxMistakes; i++) {
+    html += `<div class="dot ${i < (maxMistakes - mistakes) ? 'active' : 'spent'}"></div>`;
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function updateButtons() {
+  document.getElementById('btnDeselect').disabled = selected.length === 0;
+  const submitBtn = document.getElementById('btnSubmit');
+  submitBtn.disabled = selected.length !== 4;
+  submitBtn.classList.toggle('pulse', selected.length === 4);
+}
+
+// ═══════════════════════════════════════════════
+//  GAME LOGIC
+// ═══════════════════════════════════════════════
+function toggleWord(word) {
+  if (gameOver || gameWon) return;
+  if (selected.includes(word)) {
+    selected = selected.filter(w => w !== word);
+  } else if (selected.length < 4) {
+    selected.push(word);
+  }
+  renderGrid();
+  updateButtons();
+}
+
+function deselectAll() {
+  selected = [];
+  renderGrid();
+  updateButtons();
+}
+
+function submitGuess() {
+  if (selected.length !== 4) return;
+
+  const match = todayPuzzle.categories.find(cat =>
+    !solved.includes(cat) && selected.every(w => cat.words.includes(w))
+  );
+
+  if (match) {
+    solved.push(match);
+    grid = grid.filter(w => !match.words.includes(w));
+    selected = [];
+    renderSolved();
+    renderGrid();
+    updateButtons();
+
+    const msgs = ["Brilliant!", "Well done!", "Nailed it!", "Impressive!"];
+    showToast(msgs[solved.length - 1] || "Nice!");
+
+    if (solved.length === 4) {
+      gameWon = true;
+      endGame(true);
+    }
+  } else {
+    // Check one-away
+    let isOneAway = false;
+    for (const cat of todayPuzzle.categories) {
+      if (solved.includes(cat)) continue;
+      if (selected.filter(w => cat.words.includes(w)).length === 3) {
+        isOneAway = true;
+        break;
+      }
+    }
+
+    if (isOneAway) {
+      showToast("One away...");
+    } else {
+      showToast("Not quite...");
+    }
+
+    // Shake selected tiles
+    document.querySelectorAll('.tile.selected').forEach(t => {
+      t.classList.add('shake');
+      setTimeout(() => t.classList.remove('shake'), 450);
+    });
+
+    selected = [];
+    mistakes++;
+    renderGrid();
+    renderMistakes();
+    updateButtons();
+
+    if (mistakes >= maxMistakes) {
+      gameOver = true;
+      // Reveal all remaining
+      todayPuzzle.categories.forEach(cat => {
+        if (!solved.includes(cat)) solved.push(cat);
+      });
+      grid = [];
+      renderSolved();
+      renderGrid();
+      endGame(false);
+    }
+  }
+}
+
+function endGame(won) {
+  document.getElementById('controls').style.display = 'none';
+  document.getElementById('mistakesRow').style.display = 'none';
+  const el = document.getElementById('endState');
+  el.style.display = 'block';
+  el.innerHTML = `
+    <div class="end-msg">
+      <p style="color: ${won ? 'var(--gold)' : 'var(--cat-purple)'}">
+        ${won ? '✨ All Connections Found ✨' : '⚔️ The Prophecy Remains Unfulfilled ⚔️'}
+      </p>
+    </div>
+  `;
+}
+
+// ═══════════════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════════════
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 1800);
+}
+
+// ═══════════════════════════════════════════════
+//  COUNTDOWN
+// ═══════════════════════════════════════════════
+function startCountdown() {
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+}
+
+function updateCountdown() {
+  const now = new Date();
+  const tomorrow = new Date(now);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(0, 0, 0, 0);
+  const diff = tomorrow - now;
+
+  const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+  const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+  const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+
+  document.getElementById('timer').textContent = `${h}:${m}:${s}`;
+
+  // Auto-refresh at midnight
+  if (diff <= 1000) {
+    setTimeout(() => location.reload(), 1200);
+  }
+}
+
+// ═══════════════════════════════════════════════
+//  PARTICLES
+// ═══════════════════════════════════════════════
+function spawnParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 3 + 1;
+    const left = Math.random() * 100;
+    const dur = Math.random() * 10 + 8;
+    const delay = Math.random() * 12;
+    const dx = (Math.random() - 0.5) * 80;
+    const hue = Math.random() > 0.5 ? '50,90%,70%' : '280,50%,65%';
+    Object.assign(p.style, {
+      width: size + 'px',
+      height: size + 'px',
+      left: left + '%',
+      bottom: '-8px',
+      background: `radial-gradient(circle, hsla(${hue},0.9), hsla(${hue},0.1))`,
+      animationDuration: dur + 's',
+      animationDelay: delay + 's',
+      '--dx': dx + 'px',
+      filter: 'blur(0.4px)',
+    });
+    container.appendChild(p);
+  }
+}
+
+// ═══════════════════════════════════════════════
+//  START
+// ═══════════════════════════════════════════════
+spawnParticles();
+init();
+</script>
+</body>
+</html>
