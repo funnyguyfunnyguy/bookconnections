@@ -432,19 +432,50 @@ const PUZZLES = [
 })();
 
 // ═══════════════════════════════════════════════
-//  DATE-BASED PUZZLE SELECTION
+//  DATE-BASED PUZZLE SELECTION (UTC, no repeats)
 // ═══════════════════════════════════════════════
-function getDayIndex() {
+function getDayNumber() {
   const now = new Date();
-  const epoch = new Date(2025, 0, 1);
-  const diff = Math.floor((now - epoch) / 86400000);
-  return diff % PUZZLES.length;
+  // UTC calendar day avoids DST ±1h drift
+  const todayUTC = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const epochUTC = Date.UTC(2025, 0, 1);
+  return Math.floor((todayUTC - epochUTC) / 86400000);
+}
+
+function seededPermutation(n, seed) {
+  // Fisher-Yates shuffle with LCG deterministic RNG
+  const order = Array.from({length: n}, (_, i) => i);
+  let s = ((seed + 1) * 2654435769) >>> 0;
+  for (let i = n - 1; i > 0; i--) {
+    s = ((s * 1103515245) + 12345) >>> 0;
+    const j = s % (i + 1);
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return order;
+}
+
+function getDayIndex() {
+  const dayNum = getDayNumber();
+  const n = PUZZLES.length;
+  const cycle = Math.floor(dayNum / n);
+  const dayInCycle = ((dayNum % n) + n) % n; // handle negative
+
+  const perm = seededPermutation(n, cycle);
+
+  // Prevent the same puzzle appearing at a cycle boundary
+  if (cycle > 0 && dayInCycle === 0) {
+    const prevPerm = seededPermutation(n, cycle - 1);
+    const lastOfPrev = prevPerm[n - 1];
+    if (perm[0] === lastOfPrev && n > 1) {
+      [perm[0], perm[1]] = [perm[1], perm[0]];
+    }
+  }
+
+  return perm[dayInCycle];
 }
 
 function getPuzzleNumber() {
-  const now = new Date();
-  const epoch = new Date(2025, 0, 1);
-  return Math.floor((now - epoch) / 86400000) + 1;
+  return getDayNumber() + 1;
 }
 
 // ═══════════════════════════════════════════════
