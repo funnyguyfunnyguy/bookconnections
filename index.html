@@ -298,118 +298,307 @@
 //  PUZZLE DATABASE
 // ═══════════════════════════════════════════════
 const PUZZLES = [
-  { // 1
-    categories: [
-      { name: "Training Grounds",    emoji: "⚔️",  color: "var(--cat-yellow)", words: ["HOGWARTS","BASGIATH","HALF-BLOOD","BEAUXBATONS"] },
-      { name: "Named Dragons",       emoji: "🐉",  color: "var(--cat-green)",  words: ["TAIRN","ANDARNA","NORBERT","PELEUS"] },
-      { name: "The Love Interest",   emoji: "💘",  color: "var(--cat-blue)",   words: ["ANNABETH","GINNY","XADEN","CHO"] },
-      { name: "Secretly a Traitor",  emoji: "🗡️",  color: "var(--cat-purple)", words: ["LUKE","DAIN","QUIRRELL","SILENA"] },
-    ]
-  },
-  { // 2
-    categories: [
-      { name: "Protective Mothers",      emoji: "🛡️",  color: "var(--cat-yellow)", words: ["SALLY","LILY","LILITH","MOLLY"] },
-      { name: "Subject of a Prophecy",    emoji: "🔮",  color: "var(--cat-green)",  words: ["HARRY","PERCY","VIOLET","NEVILLE"] },
-      { name: "Winged Companions",        emoji: "🪽",  color: "var(--cat-blue)",   words: ["BUCKBEAK","BLACKJACK","FAWKES","SGAEYL"] },
-      { name: "Surname = Common Word",    emoji: "📖",  color: "var(--cat-purple)", words: ["POTTER","GRANGER","CHASE","RIDDLE"] },
-    ]
-  },
-  { // 3
-    categories: [
-      { name: "Hogwarts Houses",         emoji: "🏰",  color: "var(--cat-yellow)", words: ["GRYFFINDOR","SLYTHERIN","HUFFLEPUFF","RAVENCLAW"] },
-      { name: "Olympian Gods",           emoji: "⚡",  color: "var(--cat-green)",  words: ["POSEIDON","ATHENA","ARES","HERMES"] },
-      { name: "Violet's Squad",          emoji: "🐲",  color: "var(--cat-blue)",   words: ["RIDOC","RHIANNON","SAWYER","IMOGEN"] },
-      { name: "Kept a Dangerous Secret", emoji: "🤫",  color: "var(--cat-purple)", words: ["DUMBLEDORE","CHIRON","SNAPE","LILITH"] },
-    ]
-  },
-  { // 4
-    categories: [
-      { name: "Mythical Beasts",          emoji: "🦅",  color: "var(--cat-yellow)", words: ["HIPPOGRIFF","MINOTAUR","GRYPHON","BASILISK"] },
-      { name: "The Weasley Family",       emoji: "🧡",  color: "var(--cat-green)",  words: ["RON","GINNY","FRED","ARTHUR"] },
-      { name: "Children of the Big Three", emoji: "🔱", color: "var(--cat-blue)",   words: ["PERCY","THALIA","NICO","HAZEL"] },
-      { name: "Not What They Seem",       emoji: "🎭",  color: "var(--cat-purple)", words: ["MOODY","FRANK","TYSON","TONKS"] },
-    ]
-  },
-  { // 5
-    categories: [
-      { name: "Died Protecting Others",    emoji: "💀",  color: "var(--cat-yellow)", words: ["DOBBY","BECKENDORF","LIAM","HEDWIG"] },
-      { name: "Supreme Villain",           emoji: "👑",  color: "var(--cat-green)",  words: ["VOLDEMORT","KRONOS","VARRISH","UMBRIDGE"] },
-      { name: "The Loyal Best Friend",     emoji: "🤝",  color: "var(--cat-blue)",   words: ["GROVER","RON","RIDOC","HERMIONE"] },
-      { name: "Shadow & Darkness",         emoji: "🌑",  color: "var(--cat-purple)", words: ["NICO","XADEN","SNAPE","HADES"] },
-    ]
-  },
-  { // 6
-    categories: [
-      { name: "Led a Quest",              emoji: "🗺️",  color: "var(--cat-yellow)", words: ["PERCY","ANNABETH","CLARISSE","GROVER"] },
-      { name: "Order of the Phoenix",     emoji: "🔥",  color: "var(--cat-green)",  words: ["SIRIUS","LUPIN","TONKS","MOODY"] },
-      { name: "Marked Ones",              emoji: "⛓️",  color: "var(--cat-blue)",   words: ["XADEN","BODHI","GARRICK","LIAM"] },
-      { name: "Secret Animagus",          emoji: "🐾",  color: "var(--cat-purple)", words: ["MCGONAGALL","PETTIGREW","JAMES","RITA"] },
-    ]
-  },
-  { // 7
-    categories: [
-      { name: "Name Is Also a Flower",    emoji: "🌸",  color: "var(--cat-yellow)", words: ["VIOLET","HAZEL","LAVENDER","LILY"] },
-      { name: "Named After a Star",       emoji: "✨",  color: "var(--cat-green)",  words: ["SIRIUS","LUNA","DRACO","ANDROMEDA"] },
-      { name: "The Comic Relief",         emoji: "😂",  color: "var(--cat-blue)",   words: ["RON","GROVER","RIDOC","FRED"] },
-      { name: "Redeemed by Sacrifice",    emoji: "⚰️",  color: "var(--cat-purple)", words: ["SNAPE","SILENA","LUKE","ETHAN"] },
-    ]
-  },
-  { // 8
-    categories: [
-      { name: "Horcruxes",                emoji: "💍",  color: "var(--cat-yellow)", words: ["DIARY","RING","LOCKET","DIADEM"] },
-      { name: "Greek Monsters",           emoji: "🐍",  color: "var(--cat-green)",  words: ["MEDUSA","MINOTAUR","HYDRA","ECHIDNA"] },
-      { name: "Battle of Hogwarts Hero",  emoji: "⚔️",  color: "var(--cat-blue)",   words: ["NEVILLE","LUNA","MCGONAGALL","MOLLY"] },
-      { name: "Fourth Wing Inner Circle", emoji: "🐲",  color: "var(--cat-purple)", words: ["XADEN","LIAM","RHIANNON","BODHI"] },
-    ]
-  },
-  { // 9
-    categories: [
-      { name: "Marauder Nicknames",        emoji: "🐺",  color: "var(--cat-yellow)", words: ["MOONY","PADFOOT","PRONGS","WORMTAIL"] },
-      { name: "Camp Half-Blood Gods",      emoji: "⚡",  color: "var(--cat-green)",  words: ["DIONYSUS","APOLLO","DEMETER","APHRODITE"] },
-      { name: "Fourth Wing Dragons",       emoji: "🐉",  color: "var(--cat-blue)",   words: ["TAIRN","SGAEYL","ANDARNA","DEIGH"] },
-      { name: "Fierce Heroines",           emoji: "⚔️",  color: "var(--cat-purple)", words: ["HERMIONE","ANNABETH","VIOLET","THALIA"] },
-    ]
-  },
-  { // 10
-    categories: [
-      { name: "Triwizard Champions",       emoji: "🏆",  color: "var(--cat-yellow)", words: ["HARRY","CEDRIC","FLEUR","KRUM"] },
-      { name: "Daughters of War",          emoji: "🗡️",  color: "var(--cat-green)",  words: ["CLARISSE","VIOLET","ANNABETH","THALIA"] },
-      { name: "Prisons & Labyrinths",      emoji: "🔒",  color: "var(--cat-blue)",   words: ["AZKABAN","TARTARUS","LABYRINTH","CHAMBER"] },
-      { name: "Led With Dark Secrets",     emoji: "🌑",  color: "var(--cat-purple)", words: ["DUMBLEDORE","XADEN","CHIRON","SNAPE"] },
-    ]
-  },
-  { // 11
-    categories: [
-      { name: "Half-Blood Characters",     emoji: "🩸",  color: "var(--cat-yellow)", words: ["PERCY","HARRY","HAGRID","FRANK"] },
-      { name: "Said Goodbye Too Soon",     emoji: "💔",  color: "var(--cat-green)",  words: ["FRED","BIANCA","LIAM","SIRIUS"] },
-      { name: "Magical Healers",           emoji: "💊",  color: "var(--cat-blue)",   words: ["APOLLO","POMFREY","WILL","NOLON"] },
-      { name: "Controls an Element",       emoji: "🌊",  color: "var(--cat-purple)", words: ["POSEIDON","VIOLET","THALIA","NICO"] },
-    ]
-  },
-  { // 12
-    categories: [
-      { name: "Magical Artifacts",          emoji: "✨",  color: "var(--cat-yellow)", words: ["HORCRUX","FLEECE","CODEX","HALLOWS"] },
-      { name: "Teachers You Fear",          emoji: "😨",  color: "var(--cat-green)",  words: ["SNAPE","ARES","VARRISH","UMBRIDGE"] },
-      { name: "Has a Famous Scar",          emoji: "⚡",  color: "var(--cat-blue)",   words: ["HARRY","LUKE","XADEN","PERCY"] },
-      { name: "Immortal Beings",            emoji: "♾️",  color: "var(--cat-purple)", words: ["KRONOS","CHIRON","CALYPSO","FLAMEL"] },
-    ]
-  },
-  { // 13
-    categories: [
-      { name: "Magical Transport",               emoji: "🚀",  color: "var(--cat-yellow)", words: ["PORTKEY","FLOO","BROOM","THESTRAL"] },
-      { name: "Mythological Locations",            emoji: "🏛️",  color: "var(--cat-green)",  words: ["OLYMPUS","OGYGIA","TARTARUS","ELYSIUM"] },
-      { name: "Fourth Wing Rider Friends",         emoji: "🐲",  color: "var(--cat-blue)",   words: ["RIDOC","SAWYER","RHIANNON","IMOGEN"] },
-      { name: "Burdened by Their Parent's Rank",   emoji: "👑",  color: "var(--cat-purple)", words: ["DRACO","XADEN","DAIN","THALIA"] },
-    ]
-  },
-  { // 14
-    categories: [
-      { name: "Enchanted Weapons",          emoji: "⚔️",  color: "var(--cat-yellow)", words: ["RIPTIDE","BACKBITER","ELDER","STYGIAN"] },
-      { name: "Quidditch Positions",        emoji: "🧹",  color: "var(--cat-green)",  words: ["SEEKER","KEEPER","CHASER","BEATER"] },
-      { name: "Olympian Cabin Heads",       emoji: "🏛️",  color: "var(--cat-blue)",   words: ["PERCY","ANNABETH","CLARISSE","KATIE"] },
-      { name: "Wing Leaders & Commanders",  emoji: "🦅",  color: "var(--cat-purple)", words: ["XADEN","GARRICK","BODHI","DAIN"] },
-    ]
-  },
+  { categories: [
+    { name: "Training Grounds",    emoji: "⚔️",  color: "var(--cat-yellow)", words: ["HOGWARTS","BASGIATH","HALF-BLOOD","BEAUXBATONS"] },
+    { name: "Named Dragons",       emoji: "🐉",  color: "var(--cat-green)",  words: ["TAIRN","ANDARNA","NORBERT","PELEUS"] },
+    { name: "The Love Interest",   emoji: "💘",  color: "var(--cat-blue)",   words: ["ANNABETH","GINNY","XADEN","CHO"] },
+    { name: "Secretly a Traitor",  emoji: "🗡️",  color: "var(--cat-purple)", words: ["LUKE","DAIN","QUIRRELL","SILENA"] },
+  ]},
+  { categories: [
+    { name: "Protective Mothers",      emoji: "🛡️",  color: "var(--cat-yellow)", words: ["SALLY","LILY","LILITH","MOLLY"] },
+    { name: "Subject of a Prophecy",   emoji: "🔮",  color: "var(--cat-green)",  words: ["HARRY","PERCY","VIOLET","NEVILLE"] },
+    { name: "Winged Companions",       emoji: "🪽",  color: "var(--cat-blue)",   words: ["BUCKBEAK","BLACKJACK","FAWKES","SGAEYL"] },
+    { name: "Surname = Common Word",   emoji: "📖",  color: "var(--cat-purple)", words: ["POTTER","GRANGER","CHASE","RIDDLE"] },
+  ]},
+  { categories: [
+    { name: "Hogwarts Houses",         emoji: "🏰",  color: "var(--cat-yellow)", words: ["GRYFFINDOR","SLYTHERIN","HUFFLEPUFF","RAVENCLAW"] },
+    { name: "Olympian Gods",           emoji: "⚡",  color: "var(--cat-green)",  words: ["POSEIDON","ATHENA","ARES","HERMES"] },
+    { name: "Violet's Squad",          emoji: "🐲",  color: "var(--cat-blue)",   words: ["RIDOC","RHIANNON","SAWYER","IMOGEN"] },
+    { name: "Kept a Dangerous Secret", emoji: "🤫",  color: "var(--cat-purple)", words: ["DUMBLEDORE","CHIRON","SNAPE","LILITH"] },
+  ]},
+  { categories: [
+    { name: "Mythical Beasts",          emoji: "🦅",  color: "var(--cat-yellow)", words: ["HIPPOGRIFF","MINOTAUR","GRYPHON","BASILISK"] },
+    { name: "The Weasley Family",       emoji: "🧡",  color: "var(--cat-green)",  words: ["RON","GINNY","FRED","ARTHUR"] },
+    { name: "Children of the Big Three",emoji: "🔱",  color: "var(--cat-blue)",   words: ["PERCY","THALIA","NICO","HAZEL"] },
+    { name: "Not What They Seem",       emoji: "🎭",  color: "var(--cat-purple)", words: ["MOODY","FRANK","TYSON","TONKS"] },
+  ]},
+  { categories: [
+    { name: "Died Protecting Others",   emoji: "💀",  color: "var(--cat-yellow)", words: ["DOBBY","BECKENDORF","LIAM","HEDWIG"] },
+    { name: "Supreme Villain",          emoji: "👑",  color: "var(--cat-green)",  words: ["VOLDEMORT","KRONOS","VARRISH","UMBRIDGE"] },
+    { name: "The Loyal Best Friend",    emoji: "🤝",  color: "var(--cat-blue)",   words: ["GROVER","RON","RIDOC","HERMIONE"] },
+    { name: "Shadow & Darkness",        emoji: "🌑",  color: "var(--cat-purple)", words: ["NICO","XADEN","SNAPE","HADES"] },
+  ]},
+  { categories: [
+    { name: "Led a Quest",              emoji: "🗺️",  color: "var(--cat-yellow)", words: ["PERCY","ANNABETH","CLARISSE","GROVER"] },
+    { name: "Order of the Phoenix",     emoji: "🔥",  color: "var(--cat-green)",  words: ["SIRIUS","LUPIN","TONKS","MOODY"] },
+    { name: "Marked Ones",             emoji: "⛓️",  color: "var(--cat-blue)",   words: ["XADEN","BODHI","GARRICK","LIAM"] },
+    { name: "Secret Animagus",          emoji: "🐾",  color: "var(--cat-purple)", words: ["MCGONAGALL","PETTIGREW","JAMES","RITA"] },
+  ]},
+  { categories: [
+    { name: "Name Is Also a Flower",   emoji: "🌸",  color: "var(--cat-yellow)", words: ["VIOLET","HAZEL","LAVENDER","LILY"] },
+    { name: "Named After a Star",      emoji: "✨",  color: "var(--cat-green)",  words: ["SIRIUS","LUNA","DRACO","ANDROMEDA"] },
+    { name: "The Comic Relief",        emoji: "😂",  color: "var(--cat-blue)",   words: ["RON","GROVER","RIDOC","FRED"] },
+    { name: "Redeemed by Sacrifice",   emoji: "⚰️",  color: "var(--cat-purple)", words: ["SNAPE","SILENA","LUKE","ETHAN"] },
+  ]},
+  { categories: [
+    { name: "Horcruxes",               emoji: "💍",  color: "var(--cat-yellow)", words: ["DIARY","RING","LOCKET","DIADEM"] },
+    { name: "Greek Monsters",          emoji: "🐍",  color: "var(--cat-green)",  words: ["MEDUSA","MINOTAUR","HYDRA","ECHIDNA"] },
+    { name: "Battle of Hogwarts Hero", emoji: "⚔️",  color: "var(--cat-blue)",   words: ["NEVILLE","LUNA","MCGONAGALL","MOLLY"] },
+    { name: "Fourth Wing Inner Circle",emoji: "🐲",  color: "var(--cat-purple)", words: ["XADEN","LIAM","RHIANNON","BODHI"] },
+  ]},
+  { categories: [
+    { name: "Marauder Nicknames",      emoji: "🐺",  color: "var(--cat-yellow)", words: ["MOONY","PADFOOT","PRONGS","WORMTAIL"] },
+    { name: "Camp Half-Blood Gods",    emoji: "⚡",  color: "var(--cat-green)",  words: ["DIONYSUS","APOLLO","DEMETER","APHRODITE"] },
+    { name: "Fourth Wing Dragons",     emoji: "🐉",  color: "var(--cat-blue)",   words: ["TAIRN","SGAEYL","ANDARNA","DEIGH"] },
+    { name: "Fierce Heroines",         emoji: "⚔️",  color: "var(--cat-purple)", words: ["HERMIONE","ANNABETH","VIOLET","THALIA"] },
+  ]},
+  { categories: [
+    { name: "Triwizard Champions",     emoji: "🏆",  color: "var(--cat-yellow)", words: ["HARRY","CEDRIC","FLEUR","KRUM"] },
+    { name: "Daughters of War",        emoji: "🗡️",  color: "var(--cat-green)",  words: ["CLARISSE","VIOLET","ANNABETH","THALIA"] },
+    { name: "Prisons & Labyrinths",    emoji: "🔒",  color: "var(--cat-blue)",   words: ["AZKABAN","TARTARUS","LABYRINTH","CHAMBER"] },
+    { name: "Led With Dark Secrets",   emoji: "🌑",  color: "var(--cat-purple)", words: ["DUMBLEDORE","XADEN","CHIRON","SNAPE"] },
+  ]},
+  { categories: [
+    { name: "Half-Blood Characters",   emoji: "🩸",  color: "var(--cat-yellow)", words: ["PERCY","HARRY","HAGRID","FRANK"] },
+    { name: "Said Goodbye Too Soon",   emoji: "💔",  color: "var(--cat-green)",  words: ["FRED","BIANCA","LIAM","SIRIUS"] },
+    { name: "Magical Healers",         emoji: "💊",  color: "var(--cat-blue)",   words: ["APOLLO","POMFREY","WILL","NOLON"] },
+    { name: "Controls an Element",     emoji: "🌊",  color: "var(--cat-purple)", words: ["POSEIDON","VIOLET","THALIA","NICO"] },
+  ]},
+  { categories: [
+    { name: "Magical Artifacts",       emoji: "✨",  color: "var(--cat-yellow)", words: ["HORCRUX","FLEECE","CODEX","HALLOWS"] },
+    { name: "Teachers You Fear",       emoji: "😨",  color: "var(--cat-green)",  words: ["SNAPE","ARES","VARRISH","UMBRIDGE"] },
+    { name: "Has a Famous Scar",       emoji: "⚡",  color: "var(--cat-blue)",   words: ["HARRY","LUKE","XADEN","PERCY"] },
+    { name: "Immortal Beings",         emoji: "♾️",  color: "var(--cat-purple)", words: ["KRONOS","CHIRON","CALYPSO","FLAMEL"] },
+  ]},
+  { categories: [
+    { name: "Magical Transport",               emoji: "🚀",  color: "var(--cat-yellow)", words: ["PORTKEY","FLOO","BROOM","THESTRAL"] },
+    { name: "Mythological Locations",           emoji: "🏛️",  color: "var(--cat-green)",  words: ["OLYMPUS","OGYGIA","TARTARUS","ELYSIUM"] },
+    { name: "Fourth Wing Rider Friends",        emoji: "🐲",  color: "var(--cat-blue)",   words: ["RIDOC","SAWYER","RHIANNON","IMOGEN"] },
+    { name: "Burdened by Their Parent's Rank",  emoji: "👑",  color: "var(--cat-purple)", words: ["DRACO","XADEN","DAIN","THALIA"] },
+  ]},
+  { categories: [
+    { name: "Enchanted Weapons",       emoji: "⚔️",  color: "var(--cat-yellow)", words: ["RIPTIDE","BACKBITER","ELDER","STYGIAN"] },
+    { name: "Quidditch Positions",     emoji: "🧹",  color: "var(--cat-green)",  words: ["SEEKER","KEEPER","CHASER","BEATER"] },
+    { name: "Olympian Cabin Heads",    emoji: "🏛️",  color: "var(--cat-blue)",   words: ["PERCY","ANNABETH","CLARISSE","KATIE"] },
+    { name: "Wing Leaders & Commanders",emoji: "🦅",  color: "var(--cat-purple)", words: ["XADEN","GARRICK","BODHI","DAIN"] },
+  ]},
+  // ── 15-50: NEW PUZZLES ──
+  { categories: [
+    { name: "DADA Teachers",           emoji: "🪄",  color: "var(--cat-yellow)", words: ["QUIRRELL","LOCKHART","LUPIN","UMBRIDGE"] },
+    { name: "Rivers of the Underworld",emoji: "🌊",  color: "var(--cat-green)",  words: ["STYX","LETHE","ACHERON","PHLEGETHON"] },
+    { name: "Potions",                 emoji: "🧪",  color: "var(--cat-blue)",   words: ["FELIX","AMORTENTIA","POLYJUICE","VERITASERUM"] },
+    { name: "Also a King's Name",      emoji: "👑",  color: "var(--cat-purple)", words: ["ARTHUR","PERCY","DRACO","CEDRIC"] },
+  ]},
+  { categories: [
+    { name: "Dumbledore's Army",       emoji: "⚡",  color: "var(--cat-yellow)", words: ["NEVILLE","LUNA","GINNY","SEAMUS"] },
+    { name: "Greek Titans",            emoji: "🏔️",  color: "var(--cat-green)",  words: ["KRONOS","ATLAS","HYPERION","OCEANUS"] },
+    { name: "Hogwarts Professors",     emoji: "📚",  color: "var(--cat-blue)",   words: ["SLUGHORN","TRELAWNEY","SPROUT","FLITWICK"] },
+    { name: "Hogwarts Founders",       emoji: "🏰",  color: "var(--cat-purple)", words: ["GODRIC","HELGA","ROWENA","SALAZAR"] },
+  ]},
+  { categories: [
+    { name: "Hogwarts Ghosts",         emoji: "👻",  color: "var(--cat-yellow)", words: ["NICK","MYRTLE","HELENA","BARON"] },
+    { name: "Nature Spirits & Satyrs", emoji: "🌿",  color: "var(--cat-green)",  words: ["GROVER","JUNIPER","GLEESON","PAN"] },
+    { name: "FW Authority Figures",    emoji: "🎖️",  color: "var(--cat-blue)",   words: ["LILITH","MELGREN","VARRISH","DEVERA"] },
+    { name: "Wand Core Creatures",     emoji: "🪄",  color: "var(--cat-purple)", words: ["PHOENIX","DRAGON","UNICORN","THESTRAL"] },
+  ]},
+  { categories: [
+    { name: "Heroes of Olympus",       emoji: "⚡",  color: "var(--cat-yellow)", words: ["JASON","PIPER","LEO","FRANK"] },
+    { name: "Dark Creatures",          emoji: "👹",  color: "var(--cat-green)",  words: ["BOGGART","ACROMANTULA","NIFFLER","DEMENTOR"] },
+    { name: '"___ Wing" at Basgiath',  emoji: "🐲",  color: "var(--cat-blue)",   words: ["FIRST","SECOND","THIRD","FOURTH"] },
+    { name: "In Dumbledore's Office",  emoji: "🏛️",  color: "var(--cat-purple)", words: ["PENSIEVE","FAWKES","SORTING","SWORD"] },
+  ]},
+  { categories: [
+    { name: "Triwizard Tasks",         emoji: "🏆",  color: "var(--cat-yellow)", words: ["DRAGON","LAKE","MAZE","GOBLET"] },
+    { name: "Poseidon's Family",       emoji: "🔱",  color: "var(--cat-green)",  words: ["PERCY","TYSON","TRITON","POSEIDON"] },
+    { name: "Basgiath Quadrants",      emoji: "🐲",  color: "var(--cat-blue)",   words: ["RIDER","SCRIBE","HEALER","INFANTRY"] },
+    { name: "Hogwarts Subjects",       emoji: "📖",  color: "var(--cat-purple)", words: ["POTIONS","CHARMS","HERBOLOGY","DIVINATION"] },
+  ]},
+  { categories: [
+    { name: "Hogwarts House Heads",    emoji: "🏰",  color: "var(--cat-yellow)", words: ["MCGONAGALL","SPROUT","FLITWICK","SNAPE"] },
+    { name: "Camp Half-Blood Staff",   emoji: "🏕️",  color: "var(--cat-green)",  words: ["CHIRON","DIONYSUS","ARGUS","QUINTUS"] },
+    { name: "FW Antagonists",          emoji: "💀",  color: "var(--cat-blue)",   words: ["VARRISH","JACK","MELGREN","VENIN"] },
+    { name: "Animagus Forms",          emoji: "🐾",  color: "var(--cat-purple)", words: ["STAG","RAT","DOG","CAT"] },
+  ]},
+  { categories: [
+    { name: "HP Spells",               emoji: "🪄",  color: "var(--cat-yellow)", words: ["STUPEFY","ACCIO","LUMOS","OBLIVIATE"] },
+    { name: "Greek Primordial Beings", emoji: "🌌",  color: "var(--cat-green)",  words: ["GAEA","NYX","CHAOS","EREBUS"] },
+    { name: "Characters With Glasses", emoji: "👓",  color: "var(--cat-blue)",   words: ["HARRY","JAMES","DUMBLEDORE","TRELAWNEY"] },
+    { name: "Healers Across Series",   emoji: "💊",  color: "var(--cat-purple)", words: ["NOLON","POMFREY","WILL","APOLLO"] },
+  ]},
+  { categories: [
+    { name: "Patronus Forms",          emoji: "🦌",  color: "var(--cat-yellow)", words: ["STAG","OTTER","DOE","HARE"] },
+    { name: "Divine Weapons",          emoji: "⚡",  color: "var(--cat-green)",  words: ["BOLT","TRIDENT","HELM","CADUCEUS"] },
+    { name: "Fourth Wing Vocabulary",  emoji: "📜",  color: "var(--cat-blue)",   words: ["SIGNET","WARDS","VENIN","CODEX"] },
+    { name: "Twins in the Series",     emoji: "👯",  color: "var(--cat-purple)", words: ["FRED","GEORGE","CONNOR","TRAVIS"] },
+  ]},
+  { categories: [
+    { name: "Serpent Characters",      emoji: "🐍",  color: "var(--cat-yellow)", words: ["NAGINI","BASILISK","MEDUSA","PYTHON"] },
+    { name: "Brave Gryffindors",       emoji: "🦁",  color: "var(--cat-green)",  words: ["NEVILLE","HERMIONE","GINNY","DEAN"] },
+    { name: "PJ Original Quest Team",  emoji: "🗺️",  color: "var(--cat-blue)",   words: ["PERCY","ANNABETH","GROVER","TYSON"] },
+    { name: "FW Commanding Officers",  emoji: "🎖️",  color: "var(--cat-purple)", words: ["LILITH","MELGREN","VARRISH","DEVERA"] },
+  ]},
+  { categories: [
+    { name: "Hunters of Artemis",      emoji: "🏹",  color: "var(--cat-yellow)", words: ["ZOE","BIANCA","THALIA","ARTEMIS"] },
+    { name: "Slytherin Students",      emoji: "🐍",  color: "var(--cat-green)",  words: ["DRACO","CRABBE","GOYLE","PANSY"] },
+    { name: "FW Marked Ones",          emoji: "⛓️",  color: "var(--cat-blue)",   words: ["XADEN","GARRICK","BODHI","IMOGEN"] },
+    { name: "Healers Across Realms",   emoji: "💊",  color: "var(--cat-purple)", words: ["NOLON","POMFREY","WILL","APOLLO"] },
+  ]},
+  { categories: [
+    { name: "The Black Family",        emoji: "🖤",  color: "var(--cat-yellow)", words: ["SIRIUS","REGULUS","NARCISSA","ANDROMEDA"] },
+    { name: "Ran Away from Home",      emoji: "🏃",  color: "var(--cat-green)",  words: ["LUKE","ANNABETH","THALIA","LEO"] },
+    { name: "Violet's Inner Circle",   emoji: "🐲",  color: "var(--cat-blue)",   words: ["XADEN","LIAM","BODHI","RHIANNON"] },
+    { name: "HP Prefects",             emoji: "📛",  color: "var(--cat-purple)", words: ["HERMIONE","CEDRIC","RON","DRACO"] },
+  ]},
+  { categories: [
+    { name: "HP Magical Creatures",    emoji: "🦅",  color: "var(--cat-yellow)", words: ["HIPPOGRIFF","NIFFLER","ACROMANTULA","THESTRAL"] },
+    { name: "Roman God Names",         emoji: "🏛️",  color: "var(--cat-green)",  words: ["NEPTUNE","MARS","MERCURY","PLUTO"] },
+    { name: "FW Dragons",              emoji: "🐉",  color: "var(--cat-blue)",   words: ["TAIRN","SGAEYL","ANDARNA","DEIGH"] },
+    { name: "Dark Spells",             emoji: "💀",  color: "var(--cat-purple)", words: ["AVADA","CRUCIO","IMPERIO","MORSMORDRE"] },
+  ]},
+  { categories: [
+    { name: "Died Too Young",          emoji: "💔",  color: "var(--cat-yellow)", words: ["CEDRIC","FRED","BECKENDORF","LIAM"] },
+    { name: "Symbols of Power",        emoji: "⚡",  color: "var(--cat-green)",  words: ["BOLT","TRIDENT","HELM","CADUCEUS"] },
+    { name: "Book Title Words",        emoji: "📖",  color: "var(--cat-blue)",   words: ["LIGHTNING","CHAMBER","FOURTH","IRON"] },
+    { name: "HP Blood Status Types",   emoji: "🩸",  color: "var(--cat-purple)", words: ["PURE","HALF","MUGGLE","SQUIB"] },
+  ]},
+  { categories: [
+    { name: "HP Magical Objects",      emoji: "✨",  color: "var(--cat-yellow)", words: ["PENSIEVE","MIRROR","SNITCH","DELUMINATOR"] },
+    { name: "Camp Half-Blood Activities",emoji: "🏕️", color: "var(--cat-green)",  words: ["ARCHERY","CAPTURE","CLIMBING","CANOEING"] },
+    { name: "FW Military Terms",       emoji: "🎖️",  color: "var(--cat-blue)",   words: ["WINGLEADER","CADET","FORMATION","SQUAD"] },
+    { name: "Named After Constellations",emoji: "⭐", color: "var(--cat-purple)", words: ["SIRIUS","DRACO","LUNA","ANDROMEDA"] },
+  ]},
+  { categories: [
+    { name: "Triwizard Champions",     emoji: "🏆",  color: "var(--cat-yellow)", words: ["CEDRIC","FLEUR","KRUM","HARRY"] },
+    { name: "PJ Labyrinth Questers",   emoji: "🗺️",  color: "var(--cat-green)",  words: ["ANNABETH","GROVER","TYSON","RACHEL"] },
+    { name: "FW Flame Section",        emoji: "🔥",  color: "var(--cat-blue)",   words: ["RIDOC","RHIANNON","SAWYER","IMOGEN"] },
+    { name: "Lost Someone They Love",  emoji: "💔",  color: "var(--cat-purple)", words: ["NICO","GEORGE","VIOLET","GINNY"] },
+  ]},
+  { categories: [
+    { name: "Weasley Siblings",        emoji: "🧡",  color: "var(--cat-yellow)", words: ["RON","GINNY","CHARLIE","BILL"] },
+    { name: "Camp Jupiter Leaders",    emoji: "🦅",  color: "var(--cat-green)",  words: ["JASON","REYNA","FRANK","HAZEL"] },
+    { name: "FW Training Trials",      emoji: "⚔️",  color: "var(--cat-blue)",   words: ["PARAPET","GAUNTLET","THRESHING","SPARRING"] },
+    { name: "Wizarding World Locations",emoji: "🏰",  color: "var(--cat-purple)", words: ["HOGSMEADE","DIAGON","KNOCKTURN","AZKABAN"] },
+  ]},
+  { categories: [
+    { name: "Death Eaters",            emoji: "💀",  color: "var(--cat-yellow)", words: ["BELLATRIX","LUCIUS","BARTY","GREYBACK"] },
+    { name: "Children of Athena",      emoji: "🦉",  color: "var(--cat-green)",  words: ["ANNABETH","MALCOLM","DAEDALUS","ATHENA"] },
+    { name: "FW Dragons",              emoji: "🐉",  color: "var(--cat-blue)",   words: ["TAIRN","SGAEYL","CODAGH","DEIGH"] },
+    { name: "HP Animal Companions",    emoji: "🐾",  color: "var(--cat-purple)", words: ["HEDWIG","CROOKSHANKS","FANG","SCABBERS"] },
+  ]},
+  { categories: [
+    { name: "Over a Century Old",      emoji: "⏳",  color: "var(--cat-yellow)", words: ["DUMBLEDORE","FLAMEL","CHIRON","KRONOS"] },
+    { name: "Underworld Figures",      emoji: "💀",  color: "var(--cat-green)",  words: ["HADES","PERSEPHONE","THANATOS","CHARON"] },
+    { name: "FW Basgiath Faculty",     emoji: "🎖️",  color: "var(--cat-blue)",   words: ["LILITH","DEVERA","MARKHAM","MELGREN"] },
+    { name: "Quidditch Players",       emoji: "🧹",  color: "var(--cat-purple)", words: ["HARRY","GINNY","DRACO","OLIVER"] },
+  ]},
+  { categories: [
+    { name: "HP Potions",              emoji: "🧪",  color: "var(--cat-yellow)", words: ["AMORTENTIA","WOLFSBANE","DRAUGHT","VERITASERUM"] },
+    { name: "Greek Monsters",          emoji: "🐍",  color: "var(--cat-green)",  words: ["MEDUSA","HYDRA","CHIMERA","TYPHON"] },
+    { name: "FW Marked Ones",          emoji: "⛓️",  color: "var(--cat-blue)",   words: ["XADEN","LIAM","BODHI","GARRICK"] },
+    { name: "Battle of Hogwarts",      emoji: "⚔️",  color: "var(--cat-purple)", words: ["NEVILLE","LUNA","GINNY","FRED"] },
+  ]},
+  { categories: [
+    { name: "Animagus Forms",          emoji: "🐾",  color: "var(--cat-yellow)", words: ["STAG","RAT","DOG","CAT"] },
+    { name: "PJ Mythological Places",  emoji: "🏛️",  color: "var(--cat-green)",  words: ["OLYMPUS","LABYRINTH","OGYGIA","LOTUS"] },
+    { name: "Violet's Family",         emoji: "👨‍👩‍👧",color: "var(--cat-blue)",   words: ["VIOLET","BRENNAN","MIRA","LILITH"] },
+    { name: "HP Enchanted Objects",    emoji: "✨",  color: "var(--cat-purple)", words: ["CLOAK","MAP","MIRROR","SNITCH"] },
+  ]},
+  { categories: [
+    { name: "Named Blades",            emoji: "🗡️",  color: "var(--cat-yellow)", words: ["RIPTIDE","BACKBITER","GRYFFINDOR","STYGIAN"] },
+    { name: "Defensive Spells",        emoji: "🛡️",  color: "var(--cat-green)",  words: ["PROTEGO","EXPELLIARMUS","STUPEFY","PATRONUS"] },
+    { name: "PJ Quest Companions",     emoji: "🤝",  color: "var(--cat-blue)",   words: ["GROVER","ANNABETH","TYSON","RACHEL"] },
+    { name: "Violet's Bonds",          emoji: "🐲",  color: "var(--cat-purple)", words: ["TAIRN","ANDARNA","XADEN","RHIANNON"] },
+  ]},
+  { categories: [
+    { name: "HP Broomsticks",          emoji: "🧹",  color: "var(--cat-yellow)", words: ["FIREBOLT","NIMBUS","CLEANSWEEP","COMET"] },
+    { name: "PJ Monsters",             emoji: "🐍",  color: "var(--cat-green)",  words: ["HYDRA","CHIMERA","TYPHON","MINOTAUR"] },
+    { name: "FW Rider Ranks",          emoji: "🎖️",  color: "var(--cat-blue)",   words: ["CADET","RIDER","WINGLEADER","COMMANDER"] },
+    { name: "Olympian Weapons",        emoji: "⚡",  color: "var(--cat-purple)", words: ["BOLT","TRIDENT","HELM","AEGIS"] },
+  ]},
+  { categories: [
+    { name: "Dumbledore's Past",       emoji: "🔮",  color: "var(--cat-yellow)", words: ["GRINDELWALD","ARIANA","ABERFORTH","FLAMEL"] },
+    { name: "PJ Titan Army",           emoji: "⚔️",  color: "var(--cat-green)",  words: ["LUKE","ETHAN","ATLAS","HYPERION"] },
+    { name: "FW First-Year Squad",     emoji: "🐲",  color: "var(--cat-blue)",   words: ["VIOLET","RIDOC","RHIANNON","SAWYER"] },
+    { name: "Order of the Phoenix",    emoji: "🔥",  color: "var(--cat-purple)", words: ["SIRIUS","LUPIN","TONKS","KINGSLEY"] },
+  ]},
+  { categories: [
+    { name: "Hogwarts House Colors",   emoji: "🎨",  color: "var(--cat-yellow)", words: ["SCARLET","EMERALD","BRONZE","YELLOW"] },
+    { name: "PJ Sea Deities",          emoji: "🌊",  color: "var(--cat-green)",  words: ["POSEIDON","OCEANUS","TRITON","AMPHITRITE"] },
+    { name: "Basgiath Quadrants",      emoji: "🐲",  color: "var(--cat-blue)",   words: ["RIDER","SCRIBE","HEALER","INFANTRY"] },
+    { name: "Things That Glow",        emoji: "💡",  color: "var(--cat-purple)", words: ["LUMOS","PATRONUS","PHOENIX","LIGHTNING"] },
+  ]},
+  { categories: [
+    { name: "HP Defense Spells",       emoji: "🛡️",  color: "var(--cat-yellow)", words: ["PROTEGO","EXPELLIARMUS","STUPEFY","PATRONUS"] },
+    { name: "Children of Zeus",        emoji: "⚡",  color: "var(--cat-green)",  words: ["THALIA","JASON","HERCULES","PERSEUS"] },
+    { name: "The Sorrengail Family",   emoji: "👨‍👩‍👧",color: "var(--cat-blue)",   words: ["VIOLET","MIRA","BRENNAN","LILITH"] },
+    { name: "HP Animal Companions",    emoji: "🐾",  color: "var(--cat-purple)", words: ["HEDWIG","FANG","CROOKSHANKS","SCABBERS"] },
+  ]},
+  { categories: [
+    { name: "Destroyed a Horcrux",     emoji: "💥",  color: "var(--cat-yellow)", words: ["HARRY","RON","HERMIONE","NEVILLE"] },
+    { name: "Olympian Cabin Gods",     emoji: "🏛️",  color: "var(--cat-green)",  words: ["POSEIDON","ATHENA","ARES","APHRODITE"] },
+    { name: "FW Squad Members",        emoji: "🐲",  color: "var(--cat-blue)",   words: ["RIDOC","SAWYER","RHIANNON","IMOGEN"] },
+    { name: "HP Antagonists",          emoji: "💀",  color: "var(--cat-purple)", words: ["UMBRIDGE","BELLATRIX","GREYBACK","LUCIUS"] },
+  ]},
+  { categories: [
+    { name: "HP Quidditch Captains",   emoji: "🧹",  color: "var(--cat-yellow)", words: ["OLIVER","ANGELINA","HARRY","DRACO"] },
+    { name: "Olympian Goddesses",      emoji: "👑",  color: "var(--cat-green)",  words: ["ATHENA","ARTEMIS","APHRODITE","DEMETER"] },
+    { name: "FW Bonded Riders",        emoji: "🐲",  color: "var(--cat-blue)",   words: ["VIOLET","XADEN","RIDOC","LIAM"] },
+    { name: "Original Camp Arrivals",  emoji: "🏕️",  color: "var(--cat-purple)", words: ["PERCY","ANNABETH","GROVER","THALIA"] },
+  ]},
+  { categories: [
+    { name: "HP Muggle Characters",    emoji: "🏠",  color: "var(--cat-yellow)", words: ["DUDLEY","VERNON","PETUNIA","MARGE"] },
+    { name: "PJ Mortal Characters",    emoji: "👤",  color: "var(--cat-green)",  words: ["RACHEL","SALLY","PAUL","NANCY"] },
+    { name: "FW Basgiath Staff",       emoji: "🎖️",  color: "var(--cat-blue)",   words: ["JESINIA","MARKHAM","DEVERA","NOLON"] },
+    { name: "Cross-Series Teachers",   emoji: "📚",  color: "var(--cat-purple)", words: ["CHIRON","SNAPE","SLUGHORN","TRELAWNEY"] },
+  ]},
+  { categories: [
+    { name: "Slytherin Students",      emoji: "🐍",  color: "var(--cat-yellow)", words: ["CRABBE","GOYLE","PANSY","BLAISE"] },
+    { name: "PJ Sea Deities",          emoji: "🌊",  color: "var(--cat-green)",  words: ["POSEIDON","TRITON","AMPHITRITE","OCEANUS"] },
+    { name: "FW Riders",               emoji: "🐲",  color: "var(--cat-blue)",   words: ["XADEN","RIDOC","RHIANNON","BODHI"] },
+    { name: "Founders' Artifacts",     emoji: "✨",  color: "var(--cat-purple)", words: ["CUP","DIADEM","LOCKET","SWORD"] },
+  ]},
+  { categories: [
+    { name: "Wand Woods",             emoji: "🌳",  color: "var(--cat-yellow)", words: ["HOLLY","VINE","YEW","ELDER"] },
+    { name: "PJ Forge Workers",       emoji: "🔨",  color: "var(--cat-green)",  words: ["LEO","BECKENDORF","HEPHAESTUS","TYSON"] },
+    { name: "FW Authority Figures",   emoji: "🎖️",  color: "var(--cat-blue)",   words: ["LILITH","MELGREN","VARRISH","DEVERA"] },
+    { name: "Half of an HP Couple",   emoji: "💕",  color: "var(--cat-purple)", words: ["JAMES","LILY","HARRY","GINNY"] },
+  ]},
+  { categories: [
+    { name: "Had a Crush on Harry",   emoji: "💘",  color: "var(--cat-yellow)", words: ["GINNY","CHO","ROMILDA","PARVATI"] },
+    { name: "PJ Camp Counselors",     emoji: "🏕️",  color: "var(--cat-green)",  words: ["PERCY","ANNABETH","CLARISSE","KATIE"] },
+    { name: "FW Authority Chain",     emoji: "🎖️",  color: "var(--cat-blue)",   words: ["LILITH","MELGREN","VARRISH","DEVERA"] },
+    { name: "Name Is Also a Plant",   emoji: "🌿",  color: "var(--cat-purple)", words: ["LILY","LAVENDER","MYRTLE","PANSY"] },
+  ]},
+  { categories: [
+    { name: "HP Dueling Club",        emoji: "⚔️",  color: "var(--cat-yellow)", words: ["SNAPE","LOCKHART","DRACO","HARRY"] },
+    { name: "PJ Capture the Flag",    emoji: "🚩",  color: "var(--cat-green)",  words: ["PERCY","ANNABETH","LUKE","CLARISSE"] },
+    { name: "FW Squad Battles",       emoji: "🐲",  color: "var(--cat-blue)",   words: ["VIOLET","XADEN","DAIN","RIDOC"] },
+    { name: "The Loyal Sidekick",     emoji: "🤝",  color: "var(--cat-purple)", words: ["RON","GROVER","HERMIONE","RHIANNON"] },
+  ]},
+  { categories: [
+    { name: "Yule Ball Partners",     emoji: "💃",  color: "var(--cat-yellow)", words: ["HARRY","PARVATI","RON","PADMA"] },
+    { name: "PJ Couples",            emoji: "💕",  color: "var(--cat-green)",  words: ["PERCY","ANNABETH","FRANK","HAZEL"] },
+    { name: "FW Central Characters",  emoji: "🐲",  color: "var(--cat-blue)",   words: ["VIOLET","XADEN","RIDOC","RHIANNON"] },
+    { name: "Children of Aphrodite",  emoji: "💘",  color: "var(--cat-purple)", words: ["APHRODITE","PIPER","SILENA","DREW"] },
+  ]},
+  { categories: [
+    { name: "Muggle-Born Wizards",    emoji: "🏠",  color: "var(--cat-yellow)", words: ["HERMIONE","LILY","COLIN","JUSTIN"] },
+    { name: "Camp Half-Blood Staff",  emoji: "🏕️",  color: "var(--cat-green)",  words: ["CHIRON","DIONYSUS","TANTALUS","ARGUS"] },
+    { name: "FW Basgiath Adults",     emoji: "🎖️",  color: "var(--cat-blue)",   words: ["DEVERA","MARKHAM","LILITH","MELGREN"] },
+    { name: "Weasley Siblings",       emoji: "🧡",  color: "var(--cat-purple)", words: ["RON","GINNY","FRED","GEORGE"] },
+  ]},
+  { categories: [
+    { name: "HP First-Year Friends",  emoji: "🏰",  color: "var(--cat-yellow)", words: ["HARRY","RON","HERMIONE","NEVILLE"] },
+    { name: "PJ Book One Crew",       emoji: "🗺️",  color: "var(--cat-green)",  words: ["PERCY","GROVER","ANNABETH","CHIRON"] },
+    { name: "FW Day One Characters",  emoji: "🐲",  color: "var(--cat-blue)",   words: ["VIOLET","DAIN","RHIANNON","XADEN"] },
+    { name: "The Big Plot Twist",     emoji: "😱",  color: "var(--cat-purple)", words: ["SNAPE","DUMBLEDORE","LUKE","BRENNAN"] },
+  ]},
+  { categories: [
+    { name: "Returned from Death",   emoji: "🔄",  color: "var(--cat-yellow)", words: ["THALIA","HAZEL","BRENNAN","FAWKES"] },
+    { name: "Children of Hermes",    emoji: "👟",  color: "var(--cat-green)",  words: ["LUKE","CONNOR","TRAVIS","CHRIS"] },
+    { name: "FW Marked Ones",        emoji: "⛓️",  color: "var(--cat-blue)",   words: ["XADEN","GARRICK","BODHI","IMOGEN"] },
+    { name: "HP Half-Blood Wizards", emoji: "🩸",  color: "var(--cat-purple)", words: ["SNAPE","TOM","HARRY","SEAMUS"] },
+  ]},
 ];
 
 // ═══════════════════════════════════════════════
